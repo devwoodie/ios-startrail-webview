@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import WebView from './components/WebView';
 import Login from "./components/Login";
+import Agreement from "./components/Agreement";
 
 const App = () => {
 
@@ -22,7 +23,8 @@ const App = () => {
       <SafeAreaView style={styles.root}>
         <StatusBar barStyle={"light-content"} />
         {/*<WebView />*/}
-        <Login />
+        {/*<Login />*/}
+        <Agreement />
       </SafeAreaView>
     </>
   );
