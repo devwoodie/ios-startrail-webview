@@ -21,7 +21,7 @@ const Agreement = () => {
 
         UserStore.setAgreement(allowInformation);
 
-        // navigation.navigate('RegisterNickname');
+        navigation.navigate('RegisterNickname');
     };
 
     const checkAll = () => {

@@ -1,7 +1,14 @@
 import React, {useEffect, useRef} from "react";
 import {Animated, Image, StyleSheet, TouchableOpacity, View, Text, Platform, ImageBackground} from 'react-native';
+import { login, getProfile } from '@react-native-seoul/kakao-login';
+import jwtDecode from 'jwt-decode';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import UserStore from "../stores/UserStore";
+import {useNavigation} from "@react-navigation/native";
 
 const Login = () => {
+
+    const navigation = useNavigation();
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const fadeAnimBtn = useRef(new Animated.Value(0)).current;
@@ -21,6 +28,84 @@ const Login = () => {
         }).start();
     }, [fadeAnim]);
 
+    useEffect(() => {
+
+        const checkLoginStatus = async () => {
+            try {
+                const saveData = await AsyncStorage.getItem('jwtKey');
+                if (saveData) {
+                    UserStore.setJwtKey(saveData);
+
+                    navigation.navigate('WebView');
+                }
+            } catch (error) {
+                console.error('Error retrieving saveData:', error);
+            }
+        };
+
+        checkLoginStatus();
+
+        // if (Platform.OS === 'ios') {
+        //     if (!appleAuth.isSupported) return;
+        //
+        //     fetchAndUpdateCredentialState().catch(error =>
+        //         updateCredentialStateForUser(`Error: ${error.code}`),
+        //     )
+        // }
+    }, []);
+
+    // 카카오 로그인
+    const signInWithKakao = async() => {
+        try {
+            const kakaoResponse = await login();
+            if (kakaoResponse.accessToken) {
+                let id = '';
+                console.log("access Token : " + kakaoResponse.accessToken);
+
+                const profile = await getProfile().then((res) => {
+                    id = res.id;
+
+                    return res;
+                }).catch((error) => {
+                    throw error;
+                });
+
+                if (id && id.length > 0) {
+                    await doLogin(id, 'KAKAO', profile);
+                }
+            }
+        } catch(e) {
+            console.error(e);
+        }
+    }
+
+    // 로그인
+    const doLogin = async(id, type, data) => {
+        console.log("do!")
+        const backendResponse = await UserStore.existsUser(id, type);
+
+        console.log("backendResponse : " + JSON.stringify(backendResponse));
+
+        UserStore.setServiceUserId(id);
+        UserStore.setOauthServiceType(type);
+        UserStore.setProfile(data);
+
+        // 유저 정보가 있을 경우.
+        if (backendResponse) {
+
+            const jwtKey = await UserStore.signUser(id, type);
+
+            console.log("jwtKey : " + jwtKey);
+
+            await AsyncStorage.setItem('jwtKey', jwtKey);
+
+            navigation.navigate('WebView', jwtKey);
+        } else {
+
+            navigation.navigate('Agreement');
+        }
+
+    }
 
     return(
         <View style={styles.container}>
@@ -31,7 +116,7 @@ const Login = () => {
                 <View style={styles.textWrap}>
                     <Animated.Text style={[styles.text, { opacity: fadeAnim }]}>내가 사랑하는 사람들과{"\n"}주고받은 마음을 기록해보세요</Animated.Text>
                 </View>
-                <TouchableOpacity style={styles.buttonWrap}>
+                <TouchableOpacity style={styles.buttonWrap} onPress={signInWithKakao}>
                     <Animated.Image source={require("../images/KaKaoLoginBtn.png")} alt="kakao-btn" style={[styles.button, { opacity: fadeAnimBtn }]} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonWrap}>
