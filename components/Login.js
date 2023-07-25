@@ -24,7 +24,7 @@ const Login = () => {
 
     return(
         <View style={styles.container}>
-            <ImageBackground source={require("../images/IndexBg.png")} resizeMode="cover" style={styles.bg}>
+            <ImageBackground source={require("../images/IndexBg.png")} resizeMode="cover"  style={styles.bg}>
                 <View style={styles.logoWrap}>
                     <Animated.Image source={require("../images/Logo.png")} alt="logo" style={[styles.logo, { opacity: fadeAnim }]} />
                 </View>
@@ -37,26 +37,27 @@ const Login = () => {
                 <TouchableOpacity style={styles.buttonWrap}>
                     <Animated.Image source={require("../images/AppleLoginBtn.png")} alt="apple-btn" style={[styles.button, { opacity: fadeAnimBtn }]} />
                 </TouchableOpacity>
+                <View style={styles.empty} />
             </ImageBackground>
         </View>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "red"
+        // paddingTop: 200
     },
     bg: {
-        paddingTop: "10%",
+        width: "100%"
     },
     logoWrap: {
         display: "flex",
         alignItems: "center",
-        marginTop: "45%",
-        marginBottom: "35%"
+        marginTop: "65%",
+        marginBottom: "35%",
     },
     logo: {
         width: 70,
-        height: 88
+        height: 88,
     },
     textWrap: {
         display: "flex",
@@ -79,6 +80,10 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 8,
         overflow: "hidden"
+    },
+    empty: {
+        backgroundColor: "#1E1E1E",
+        height: 200
     }
 })
 export default Login;
