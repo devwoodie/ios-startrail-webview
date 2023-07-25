@@ -13,6 +13,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import WebView from './components/WebView';
+import Login from "./components/Login";
 
 const App = () => {
 
@@ -20,7 +21,8 @@ const App = () => {
     <>
       <SafeAreaView style={styles.root}>
         <StatusBar barStyle={"light-content"} />
-        <WebView />
+        {/*<WebView />*/}
+        <Login />
       </SafeAreaView>
     </>
   );

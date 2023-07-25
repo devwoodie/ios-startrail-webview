@@ -7,7 +7,7 @@ const MyWebView = ({route, navigation}) => {
   useEffect(() => {
     if (webview && webview.clearCache) webview.clearCache();
   }, [webview]);
-    console.log(BASE_URL)
+
   return (
     <WebView
       pullToRefreshEnabled={true}
