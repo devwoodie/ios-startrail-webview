@@ -1,7 +1,8 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Animated, Image, StyleSheet, TouchableOpacity, View, Text, Platform, ImageBackground} from 'react-native';
 import { login, getProfile } from '@react-native-seoul/kakao-login';
 import jwtDecode from 'jwt-decode';
+import appleAuth from '@invertase/react-native-apple-authentication';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import UserStore from "../stores/UserStore";
 import {useNavigation} from "@react-navigation/native";
@@ -9,7 +10,8 @@ import {useNavigation} from "@react-navigation/native";
 const Login = () => {
 
     const navigation = useNavigation();
-
+    // apple 로그인 전용 데이터
+    const [credentialStateForUser, updateCredentialStateForUser] = useState(-1);
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const fadeAnimBtn = useRef(new Animated.Value(0)).current;
 
@@ -29,7 +31,6 @@ const Login = () => {
     }, [fadeAnim]);
 
     useEffect(() => {
-
         const checkLoginStatus = async () => {
             try {
                 const saveData = await AsyncStorage.getItem('jwtKey');
@@ -45,13 +46,13 @@ const Login = () => {
 
         checkLoginStatus();
 
-        // if (Platform.OS === 'ios') {
-        //     if (!appleAuth.isSupported) return;
-        //
-        //     fetchAndUpdateCredentialState().catch(error =>
-        //         updateCredentialStateForUser(`Error: ${error.code}`),
-        //     )
-        // }
+        if (Platform.OS === 'ios') {
+            if (!appleAuth.isSupported) return;
+
+            fetchAndUpdateCredentialState().catch(error =>
+                updateCredentialStateForUser(`Error: ${error.code}`),
+            )
+        }
     }, []);
 
     // 카카오 로그인
@@ -76,6 +77,59 @@ const Login = () => {
             }
         } catch(e) {
             console.error(e);
+        }
+    }
+
+    const sighWithAppleInIOS = async() => {
+
+        try {
+            const response = await appleAuth.performRequest({
+                requestedOperation : appleAuth.Operation.LOGIN,
+                requestedScopes : [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL]
+            });
+
+            const {
+                newUser,
+                email,
+                nonce,
+                identityToken,
+                realUserStatus
+            } = response;
+
+            fetchAndUpdateCredentialState(newUser)
+                .catch(error => updateCredentialStateForUser(`Error : ${error.code}`));
+
+            if (response) {
+                const code = response.code;
+                const id_token = response.id_token;
+                const user = response.user;
+                const state = response.state;
+
+                console.log("Got auth code", code);
+                console.log("Got id_token", id_token);
+                console.log("Got user", user);
+                console.log("Got state", state);
+
+                const { email, email_verified, is_private_email, sub } = jwtDecode(response.id_token);
+
+                await doLogin(email, 'APPLE', {});
+            }
+
+        } catch(error) {
+            console.error(error);
+        }
+    }
+
+    const fetchAndUpdateCredentialState = async(user) => {
+        if (user === null) {
+            updateCredentialStateForUser('N/A');
+        } else {
+            const credentialState = await appleAuth.getCredentialStateForUser(user);
+            if (credentialState === appleAuth.State.AUTHORIZED) {
+                updateCredentialStateForUser('AUTHORIZED');
+            } else {
+                updateCredentialStateForUser(credentialState);
+            }
         }
     }
 
@@ -119,7 +173,7 @@ const Login = () => {
                 <TouchableOpacity style={styles.buttonWrap} onPress={signInWithKakao}>
                     <Animated.Image source={require("../images/KaKaoLoginBtn.png")} alt="kakao-btn" style={[styles.button, { opacity: fadeAnimBtn }]} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonWrap}>
+                <TouchableOpacity style={styles.buttonWrap} onPress={sighWithAppleInIOS}>
                     <Animated.Image source={require("../images/AppleLoginBtn.png")} alt="apple-btn" style={[styles.button, { opacity: fadeAnimBtn }]} />
                 </TouchableOpacity>
                 <View style={styles.empty} />
