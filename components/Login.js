@@ -119,7 +119,7 @@ const Login = () => {
     }
 
     const fetchAndUpdateCredentialState = async(user) => {
-        console.log("user: ",user)
+
         if (user === null) {
             updateCredentialStateForUser('N/A');
         } else {

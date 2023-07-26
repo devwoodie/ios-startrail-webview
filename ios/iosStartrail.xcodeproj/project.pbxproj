@@ -15,6 +15,7 @@
 		7D6746A8773C797F5FC83051 /* libPods-iosStartrail-iosStartrailTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F77E5DD37962753C23A723 /* libPods-iosStartrail-iosStartrailTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		C13DDB372A6ED2A400822C2E /* Swift Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13DDB362A6ED2A400822C2E /* Swift Bridge.swift */; };
+		C15DD2432A716701001BE832 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C15DD2452A716701001BE832 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		C13DDB352A6ED2A400822C2E /* iosStartrail-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iosStartrail-Bridging-Header.h"; sourceTree = "<group>"; };
 		C13DDB362A6ED2A400822C2E /* Swift Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift Bridge.swift"; sourceTree = "<group>"; };
 		C15DD2402A715605001BE832 /* iosStartrail.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = iosStartrail.entitlements; path = iosStartrail/iosStartrail.entitlements; sourceTree = "<group>"; };
+		C15DD2442A716701001BE832 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C15DD2462A716709001BE832 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F40347EBFDAA98ED6502D0E1 /* Pods-iosStartrail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosStartrail.release.xcconfig"; path = "Target Support Files/Pods-iosStartrail/Pods-iosStartrail.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				C15DD2402A715605001BE832 /* iosStartrail.entitlements */,
+				C15DD2452A716701001BE832 /* InfoPlist.strings */,
 				C13DDB362A6ED2A400822C2E /* Swift Bridge.swift */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -225,6 +229,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -250,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				C15DD2432A716701001BE832 /* InfoPlist.strings in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +441,18 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		C15DD2452A716701001BE832 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C15DD2442A716701001BE832 /* ko */,
+				C15DD2462A716709001BE832 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -442,6 +460,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = XQ24HP64B3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -458,7 +477,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mamgwanboowebview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iosStartrail.app/iosStartrail";
 			};
@@ -471,6 +490,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = XQ24HP64B3;
 				INFOPLIST_FILE = iosStartrailTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,7 +503,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mamgwanboowebview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iosStartrail.app/iosStartrail";
 			};
@@ -496,7 +516,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = iosStartrail/iosStartrail.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XQ24HP64B3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = iosStartrail/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +534,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mamgwanboowebview;
 				PRODUCT_NAME = iosStartrail;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "iosStartrail-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -525,7 +549,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = iosStartrail/iosStartrail.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XQ24HP64B3;
 				INFOPLIST_FILE = iosStartrail/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -539,6 +566,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mamgwanboowebview;
 				PRODUCT_NAME = iosStartrail;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "iosStartrail-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
