@@ -36,7 +36,6 @@ const Login = () => {
                 const saveData = await AsyncStorage.getItem('jwtKey');
                 if (saveData) {
                     UserStore.setJwtKey(saveData);
-
                     navigation.navigate('WebView');
                 }
             } catch (error) {
@@ -71,7 +70,7 @@ const Login = () => {
                     throw error;
                 });
 
-                if (id && id.length > 0) {
+                if (id && id !== "") {
                     await doLogin(id, 'KAKAO', profile);
                 }
             }
@@ -105,10 +104,10 @@ const Login = () => {
                 const user = response.user;
                 const state = response.state;
 
-                console.log("Got auth code", code);
-                console.log("Got id_token", id_token);
-                console.log("Got user", user);
-                console.log("Got state", state);
+                // console.log("Got auth code", code);
+                // console.log("Got id_token", id_token);
+                // console.log("Got user", user);
+                // console.log("Got state", state);
 
                 const { email, email_verified, is_private_email, sub } = jwtDecode(response.id_token);
 
@@ -135,7 +134,6 @@ const Login = () => {
 
     // 로그인
     const doLogin = async(id, type, data) => {
-        console.log("do!")
         const backendResponse = await UserStore.existsUser(id, type);
 
         console.log("backendResponse : " + JSON.stringify(backendResponse));

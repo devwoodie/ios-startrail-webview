@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {WebView} from 'react-native-webview';
 import UserStore from '../stores/UserStore';
 
@@ -10,8 +10,19 @@ const MyWebView = ({route, navigation}) => {
     if (webview && webview.clearCache) webview.clearCache();
   }, [webview]);
 
+    let webViewRef = useRef()
+    const handleSetRef = _ref => {
+        webViewRef = _ref;
+    };
+
+    const handleEndLoading = e => {
+        webViewRef.postMessage(UserStore.getJwtKey);
+    };
+
   return (
       <WebView
+          ref={handleSetRef}
+          onLoadEnd={handleEndLoading}
           pullToRefreshEnabled={true}
           startInLoadingState={true}
           allowsBackForwardNavigationGestures={true}
@@ -20,23 +31,15 @@ const MyWebView = ({route, navigation}) => {
           mixedContentMode={'compatibility'}
           originWhitelist={['https://*', 'http://*']}
           overScrollMode={'never'}
+          postMessage={{}}
           onMessage={(event) => {
-
               const message = event.nativeEvent.data;
-              console.log("event data : " + event.nativeEvent.data);
 
               if (message === "logout") {
                   navigation.navigate('Login');
-
                   AsyncStorage.removeItem('jwtKey');
               }
-
           }}
-          injectedJavaScript={`
-                (function() {
-                    window.postMessage('${JSON.stringify(UserStore.getJwtKey)}', '*');
-                })();
-            `}
       />
   );
 };

@@ -2,7 +2,7 @@ import axios from "axios";
 import { computed, makeObservable, observable, action } from "mobx";
 
 class UserStore {
-    
+
     baseUrl = 'https://www.byeoljachui.com';
     jwtKey = '';
     serviceUserId = '';
@@ -73,9 +73,9 @@ class UserStore {
     setNickname = (nickname) => {
         let data = this.getProfile;
 
-        
+
         data['nickname'] = nickname;
-        
+
         this.setProfile(data);
     }
 
@@ -119,7 +119,7 @@ class UserStore {
     postUser = async(userId, serviceType, data, agreement) => {
 
         const request = this.convertResponse2PostRequest(userId, serviceType, data, agreement);
-
+        console.log("23234234",this.baseUrl)
         const response = await axios.post(`${this.baseUrl}/api/users`, request, {
                 headers : {
                     "Content-Type" : "application/json"
@@ -153,22 +153,22 @@ class UserStore {
             console.log("data : " + JSON.stringify(profile));
 
             const birthday = profile.birthday;
-    
+
             const month = parseInt(birthday.slice(0,2));
             const day = parseInt(birthday.slice(2));
-        
+
             const birthDayObj = {
                 year : 0,
                 month : month,
                 day : day
             };
-        
-            const sexType = profile.gender;
-        
+
+            const sexType = profile.gender === "male" ? "MALE" : profile.gender === "female" ? "FEMALE" : "";
+
             const ageRangeText = profile.ageRange;
-        
+
             let ageRange = 'UNDER_TEEN';
-    
+
             switch(ageRangeText) {
             case 'AGE_0_9' :
                 ageRange = 'UNDER_TEEN';

@@ -33,6 +33,11 @@ const RegisterNickname = () => {
         const profile = UserStore.getProfile;
         const agreement = UserStore.getAgreement;
 
+        console.log("userId: ", userId)
+        console.log("serviceType: ", serviceType)
+        console.log("profile: ", profile)
+        console.log("agreement: ", agreement)
+
         UserStore.setNickname(value);
 
         const response = await UserStore.postUser(userId, serviceType, profile, agreement);
@@ -47,9 +52,7 @@ const RegisterNickname = () => {
     return (
         <View style={styles.page}>
             <View style={styles.header}>
-                <Text style={styles.title}>
-                    이름을 설정하세요.
-                </Text>
+                <Text style={styles.title}>이름을 설정하세요.</Text>
             </View>
             <View style={styles.body}>
                 <TextInput
@@ -59,12 +62,7 @@ const RegisterNickname = () => {
                     placeholderTextColor={'#818181'}
                     style={styles.input}
                 />
-                {
-                    !valid &&
-                    <Text style={styles.warning}>
-                        {warning}
-                    </Text>
-                }
+                {!valid && <Text style={styles.warning}>{warning}</Text> }
             </View>
             <View style={styles.buttonDiv}>
                 <TouchableOpacity
@@ -85,9 +83,10 @@ const styles = StyleSheet.create({
         backgroundColor : "#1E1E1E",
     },
     header : {
-        flex : 1,
         alignItems: 'flex-start',
         justifyContent : 'center',
+        marginTop: 70,
+        marginBottom: 50
     },
     title : {
         color : 'white',
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
         color : '#FA7F64',
         textAlign : 'left',
         marginTop : 10,
-        marginHorizontal: 24,
+        marginHorizontal: 30,
     },
     nextButton : {
         width : 350,
