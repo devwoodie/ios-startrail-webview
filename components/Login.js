@@ -80,7 +80,6 @@ const Login = () => {
     }
 
     const sighWithAppleInIOS = async() => {
-
         try {
             const response = await appleAuth.performRequest({
                 requestedOperation : appleAuth.Operation.LOGIN,
@@ -104,10 +103,10 @@ const Login = () => {
                 const user = response.user;
                 const state = response.state;
 
-                // console.log("Got auth code", code);
-                // console.log("Got id_token", id_token);
-                // console.log("Got user", user);
-                // console.log("Got state", state);
+                console.log("Got auth code", code);
+                console.log("Got id_token", id_token);
+                console.log("Got user", user);
+                console.log("Got state", state);
 
                 const { email, email_verified, is_private_email, sub } = jwtDecode(response.id_token);
 
@@ -120,6 +119,7 @@ const Login = () => {
     }
 
     const fetchAndUpdateCredentialState = async(user) => {
+        console.log("user: ",user)
         if (user === null) {
             updateCredentialStateForUser('N/A');
         } else {

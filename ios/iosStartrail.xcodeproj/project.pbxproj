@@ -45,6 +45,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = iosStartrail/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C13DDB352A6ED2A400822C2E /* iosStartrail-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iosStartrail-Bridging-Header.h"; sourceTree = "<group>"; };
 		C13DDB362A6ED2A400822C2E /* Swift Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift Bridge.swift"; sourceTree = "<group>"; };
+		C15DD2402A715605001BE832 /* iosStartrail.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = iosStartrail.entitlements; path = iosStartrail/iosStartrail.entitlements; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F40347EBFDAA98ED6502D0E1 /* Pods-iosStartrail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosStartrail.release.xcconfig"; path = "Target Support Files/Pods-iosStartrail/Pods-iosStartrail.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +90,7 @@
 		13B07FAE1A68108700A75B9A /* iosStartrail */ = {
 			isa = PBXGroup;
 			children = (
+				C15DD2402A715605001BE832 /* iosStartrail.entitlements */,
 				C13DDB362A6ED2A400822C2E /* Swift Bridge.swift */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -493,6 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = iosStartrail/iosStartrail.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = iosStartrail/Info.plist;
@@ -521,6 +524,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = iosStartrail/iosStartrail.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = iosStartrail/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
