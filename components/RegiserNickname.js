@@ -33,11 +33,6 @@ const RegisterNickname = () => {
         const profile = UserStore.getProfile;
         const agreement = UserStore.getAgreement;
 
-        console.log("userId: ", userId)
-        console.log("serviceType: ", serviceType)
-        console.log("profile: ", profile)
-        console.log("agreement: ", agreement)
-
         UserStore.setNickname(value);
 
         const response = await UserStore.postUser(userId, serviceType, profile, agreement);

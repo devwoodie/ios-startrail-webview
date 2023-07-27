@@ -18,7 +18,7 @@ const MyWebView = ({route, navigation}) => {
     const handleEndLoading = e => {
         webViewRef.postMessage(UserStore.getJwtKey);
     };
-
+    console.log(UserStore.getJwtKey)
   return (
       <WebView
           ref={handleSetRef}

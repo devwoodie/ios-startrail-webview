@@ -60,11 +60,8 @@ const Login = () => {
             const kakaoResponse = await login();
             if (kakaoResponse.accessToken) {
                 let id = '';
-                console.log("access Token : " + kakaoResponse.accessToken);
-
                 const profile = await getProfile().then((res) => {
                     id = res.id;
-
                     return res;
                 }).catch((error) => {
                     throw error;
@@ -98,18 +95,7 @@ const Login = () => {
                 .catch(error => updateCredentialStateForUser(`Error : ${error.code}`));
 
             if (response) {
-                const code = response.code;
-                const id_token = response.id_token;
-                const user = response.user;
-                const state = response.state;
-
-                console.log("Got auth code", code);
-                console.log("Got id_token", id_token);
-                console.log("Got user", user);
-                console.log("Got state", state);
-
-                const { email, email_verified, is_private_email, sub } = jwtDecode(response.id_token);
-
+                const { email, email_verified, is_private_email, sub } = jwtDecode(response.identityToken);
                 await doLogin(email, 'APPLE', {});
             }
 
@@ -136,24 +122,18 @@ const Login = () => {
     const doLogin = async(id, type, data) => {
         const backendResponse = await UserStore.existsUser(id, type);
 
-        console.log("backendResponse : " + JSON.stringify(backendResponse));
-
         UserStore.setServiceUserId(id);
         UserStore.setOauthServiceType(type);
         UserStore.setProfile(data);
 
         // 유저 정보가 있을 경우.
         if (backendResponse) {
-
             const jwtKey = await UserStore.signUser(id, type);
-
-            console.log("jwtKey : " + jwtKey);
 
             await AsyncStorage.setItem('jwtKey', jwtKey);
 
             navigation.navigate('WebView', jwtKey);
         } else {
-
             navigation.navigate('Agreement');
         }
 
@@ -189,12 +169,14 @@ const styles = StyleSheet.create({
     logoWrap: {
         display: "flex",
         alignItems: "center",
-        marginTop: "65%",
+        marginTop: "60%",
         marginBottom: "35%",
+        paddingVertical: 20
     },
     logo: {
-        width: 70,
-        height: 88,
+        paddingTop: 10,
+        width: 80,
+        height: 108,
     },
     textWrap: {
         display: "flex",

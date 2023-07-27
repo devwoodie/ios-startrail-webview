@@ -109,17 +109,13 @@ class UserStore {
         }).then(res => {return res.data})
         .catch(error => console.error(error));
 
-        console.log("response body : " + JSON.stringify(response));
-
         this.setJwtKey(response);
 
         return response;
     }
 
     postUser = async(userId, serviceType, data, agreement) => {
-
         const request = this.convertResponse2PostRequest(userId, serviceType, data, agreement);
-        console.log("23234234",this.baseUrl)
         const response = await axios.post(`${this.baseUrl}/api/users`, request, {
                 headers : {
                     "Content-Type" : "application/json"
@@ -149,11 +145,7 @@ class UserStore {
         }
 
         if (serviceType === 'KAKAO') {
-
-            console.log("data : " + JSON.stringify(profile));
-
             const birthday = profile.birthday;
-
             const month = parseInt(birthday.slice(0,2));
             const day = parseInt(birthday.slice(2));
 
