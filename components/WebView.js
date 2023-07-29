@@ -1,11 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useEffect, useRef, useState} from 'react';
+import {View} from "react-native";
 import {WebView} from 'react-native-webview';
 import UserStore from '../stores/UserStore';
 
 const MyWebView = ({route, navigation}) => {
   const BASE_URL = 'https://www.byeoljachui.com/';
   const [webview, setWebview] = useState();
+  console.log("토큰이다!!! -->>",UserStore.getJwtKey);
+
   useEffect(() => {
     if (webview && webview.clearCache) webview.clearCache();
   }, [webview]);
@@ -18,29 +21,31 @@ const MyWebView = ({route, navigation}) => {
     const handleEndLoading = e => {
         webViewRef.postMessage(UserStore.getJwtKey);
     };
-    console.log(UserStore.getJwtKey)
-  return (
-      <WebView
-          ref={handleSetRef}
-          onLoadEnd={handleEndLoading}
-          pullToRefreshEnabled={true}
-          startInLoadingState={true}
-          allowsBackForwardNavigationGestures={true}
-          source={{uri: BASE_URL}}
-          sharedCookiesEnabled={true}
-          mixedContentMode={'compatibility'}
-          originWhitelist={['https://*', 'http://*']}
-          overScrollMode={'never'}
-          postMessage={{}}
-          onMessage={(event) => {
-              const message = event.nativeEvent.data;
 
-              if (message === "logout") {
-                  navigation.navigate('Login');
-                  AsyncStorage.removeItem('jwtKey');
-              }
-          }}
-      />
+  return (
+      <View style={{ flex: 1 }}>
+          <WebView
+              ref={handleSetRef}
+              onLoadEnd={handleEndLoading}
+              pullToRefreshEnabled={true}
+              startInLoadingState={true}
+              allowsBackForwardNavigationGestures={false}
+              source={{uri: BASE_URL}}
+              sharedCookiesEnabled={true}
+              mixedContentMode={'compatibility'}
+              originWhitelist={['https://*', 'http://*']}
+              overScrollMode={'never'}
+              postMessage={{}}
+              onMessage={(event) => {
+                  const message = event.nativeEvent.data;
+
+                  if (message === "logout") {
+                      navigation.navigate('Login');
+                      AsyncStorage.removeItem('jwtKey');
+                  }
+              }}
+          />
+      </View>
   );
 };
 

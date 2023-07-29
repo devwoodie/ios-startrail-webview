@@ -17,14 +17,19 @@ const App = () => {
     <>
       <SafeAreaView style={styles.root}>
         <StatusBar barStyle={"light-content"} />
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
-            <Stack.Screen name='Agreement' component={Agreement} options={{ headerShown: false }}/>
-            <Stack.Screen name='Term' component={Terms} options={{ headerShown: false }}/>
-            <Stack.Screen name='RegisterNickname' component={RegisterNickname} options={{ headerShown: false }}/>
-            <Stack.Screen name='WebView' component={WebView} options={{ headerShown: false }}/>
-          </Stack.Navigator>
+          <NavigationContainer>
+            <Stack.Navigator
+                screenOptions={{
+                  gestureEnabled: false,
+                  swipeEnabled: false,
+                }}
+            >
+              <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
+              <Stack.Screen name='Agreement' component={Agreement} options={{ headerShown: false }}/>
+              <Stack.Screen name='Term' component={Terms} options={{ headerShown: false }}/>
+              <Stack.Screen name='RegisterNickname' component={RegisterNickname} options={{ headerShown: false }}/>
+              <Stack.Screen name='WebView' component={WebView} options={{ headerShown: false }}/>
+            </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
     </>

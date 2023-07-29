@@ -68,13 +68,13 @@ const RegisterNickname = () => {
                 />
                 {!valid && <Text style={styles.warning}>{warning}</Text> }
             </View>
-            <View style={styles.buttonDiv}>
+            <View style={styles.buttonDiv} onPress={postUser}>
                 <TouchableOpacity
                     style={(value.length > 0 && valid) ? styles.nextButton : styles.disabledButton}
                     disabled={!(value.length > 0 && valid)}
                     onPress={postUser}
                 >
-                    <Text style={styles.buttonText}>완료</Text>
+                    <Text style={styles.buttonText} onPress={postUser}>완료</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color : 'white',
-        fontSize : 15,
+        fontSize : 15
     },
 });
 
