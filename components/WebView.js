@@ -9,9 +9,9 @@ const MyWebView = ({route, navigation}) => {
   const [webview, setWebview] = useState();
   console.log("토큰이다!!! -->>",UserStore.getJwtKey);
 
-  useEffect(() => {
-    if (webview && webview.clearCache) webview.clearCache();
-  }, [webview]);
+    useEffect(() => {
+        if (webview && webview.clearCache) webview.clearCache();
+    }, [webview]);
 
     let webViewRef = useRef()
     const handleSetRef = _ref => {

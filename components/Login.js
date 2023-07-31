@@ -169,9 +169,9 @@ const styles = StyleSheet.create({
     logoWrap: {
         display: "flex",
         alignItems: "center",
-        marginTop: "60%",
-        marginBottom: "35%",
-        paddingVertical: 20
+        marginTop: 100,
+        marginBottom: 100,
+        paddingVertical: 50
     },
     logo: {
         paddingTop: 10,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
         marginVertical: 8,
     },
     button: {
-        width: 350,
+        width: 320,
         height: 50,
         borderRadius: 8,
         overflow: "hidden"
