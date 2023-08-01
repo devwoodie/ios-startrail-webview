@@ -154,34 +154,30 @@ const Login = () => {
                 <TouchableOpacity style={styles.buttonWrap} onPress={sighWithAppleInIOS}>
                     <Animated.Image source={require("../images/AppleLoginBtn.png")} alt="apple-btn" style={[styles.button, { opacity: fadeAnimBtn }]} />
                 </TouchableOpacity>
-                <View style={styles.empty} />
             </ImageBackground>
         </View>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        // paddingTop: 200
+        flex: 1,
     },
     bg: {
-        width: "100%"
+        flex: 1,
+        justifyContent: 'center',
     },
     logoWrap: {
         display: "flex",
         alignItems: "center",
-        marginTop: 100,
-        marginBottom: 100,
-        paddingVertical: 50
+        marginTop: -50
     },
     logo: {
-        paddingTop: 10,
         width: 80,
         height: 108,
     },
     textWrap: {
-        display: "flex",
-        alignItems: "center",
-        marginBottom: "15%"
+        marginTop: 24,
+        marginBottom: 110
     },
     text: {
         textAlign: "center",
@@ -190,19 +186,15 @@ const styles = StyleSheet.create({
         fontWeight: 500,
     },
     buttonWrap: {
-        display: "flex",
         alignItems: "center",
-        marginVertical: 8,
+        marginTop: 16,
+        marginHorizontal: 44
     },
     button: {
-        width: 320,
+        width: "100%",
         height: 50,
-        borderRadius: 8,
+        borderRadius: 40,
         overflow: "hidden"
     },
-    empty: {
-        backgroundColor: "#1E1E1E",
-        height: 200
-    }
 })
 export default Login;

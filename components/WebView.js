@@ -7,7 +7,6 @@ import UserStore from '../stores/UserStore';
 const MyWebView = ({route, navigation}) => {
   const BASE_URL = 'https://www.byeoljachui.com/';
   const [webview, setWebview] = useState();
-  console.log("토큰이다!!! -->>",UserStore.getJwtKey);
 
     useEffect(() => {
         if (webview && webview.clearCache) webview.clearCache();
@@ -50,6 +49,9 @@ const MyWebView = ({route, navigation}) => {
               originWhitelist={['https://*', 'http://*']}
               overScrollMode={'never'}
               postMessage={{}}
+              onContentProcessDidTerminate={() => {
+                  webViewRef.current?.reload();
+              }}
               onMessage={(event) => {
                   const message = event.nativeEvent.data;
 
